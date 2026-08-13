@@ -1,0 +1,45 @@
+---
+import Layout from "../../../layouts/Layout.astro";
+import ComicMeta from "../../../components/ComicMeta.astro";
+import ChapterList from "../../../components/ChapterList.astro";
+import { getAllComics, getComic, parseChapters } from "../../../lib/comics";
+
+export async function getStaticPaths() {
+  const comics = await getAllComics();
+  return comics.map((comic) => ({
+    params: { slug: comic.slug },
+  }));
+}
+
+const { slug } = Astro.params;
+const comic = await getComic(slug!);
+if (!comic) {
+  throw new Error(`Comic "${slug}" 不存在`);
+}
+
+const { title, tags, description, cover, artist } = comic.data;
+const chapters = parseChapters(comic);
+---
+
+<Layout title={title} description={description ?? title}>
+  <div class="comic-detail">
+    <div class="comic-detail-cover">
+      <img
+        src={cover}
+        alt={title}
+        width="600"
+        height="900"
+        onerror="this.onerror=null;this.src='/default-cover.webp';"
+      />
+    </div>
+
+    <div class="comic-detail-body">
+      <ComicMeta title={title} artist={artist} tags={tags} description={description} />
+
+      <section class="detail-chapters">
+        <h2 class="section-title">章节列表</h2>
+        <ChapterList comicSlug={slug!} chapters={chapters} />
+      </section>
+    </div>
+  </div>
+</Layout>

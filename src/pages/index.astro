@@ -1,0 +1,21 @@
+---
+import Layout from "../layouts/Layout.astro";
+import ComicGrid from "../components/ComicGrid.astro";
+import { getAllComics } from "../lib/comics";
+
+const comics = await getAllComics();
+---
+
+<Layout
+  title="星之轨 - Tsukipool"
+  description="星之轨（Tsukipool）· 月色真美，风也温柔。在线漫画阅读网站：精选漫画合集，章节连载更新，支持标签筛选与全文搜索。"
+>
+  <section class="hero">
+    <p class="hero-overline">T S U K I P O O L</p>
+    <h1>月色之下，<span class="accent-text">一部好看的漫画</span></h1>
+    <p class="hero-sub">精选漫画合集 · 章节阅读 · 标签筛选 · 全文搜索</p>
+  </section>
+
+  <h2 class="section-title">全部漫画</h2>
+  <ComicGrid comics={comics} />
+</Layout>

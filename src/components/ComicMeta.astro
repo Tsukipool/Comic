@@ -1,0 +1,26 @@
+---
+import { tagSlug } from "../lib/slug";
+
+interface Props {
+  title: string;
+  artist: string;
+  tags: string[];
+  description?: string;
+}
+
+const { title, artist, tags, description } = Astro.props;
+---
+
+<h1 class="comic-title">{title}</h1>
+
+<p class="comic-artist">画师：{artist}</p>
+
+<div class="comic-meta-tags">
+  {tags.map((tag) => (
+    <a class="tag-link" href={`/tag/${tagSlug(tag)}`}>
+      #{tag}
+    </a>
+  ))}
+</div>
+
+{description && <p class="comic-description">{description}</p>}

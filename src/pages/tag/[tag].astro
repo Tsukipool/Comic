@@ -1,0 +1,27 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import ComicGrid from "../../components/ComicGrid.astro";
+import { getAllTags, getComicsByTagSlug } from "../../lib/tags";
+import { tagNameFromSlug } from "../../lib/slug";
+
+export async function getStaticPaths() {
+  const tags = await getAllTags();
+  return tags.map((tag) => ({
+    params: { tag: tag.slug },
+  }));
+}
+
+const { tag } = Astro.params;
+const tagName = tagNameFromSlug(tag ?? "") ?? tag ?? "";
+const comics = await getComicsByTagSlug(tag ?? "");
+---
+
+<Layout title={`标签：${tagName}`} description={`星之轨（Tsukipool）· 标签「${tagName}」下的全部漫画`}>
+  <h1 class="section-title">
+    标签：<span style="color: var(--muted);">{tagName}</span>
+  </h1>
+  <p style="color: var(--muted); font-size: 0.9rem; margin-bottom: 1rem;">
+    共 {comics.length} 部漫画
+  </p>
+  <ComicGrid comics={comics} />
+</Layout>

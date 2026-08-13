@@ -1,0 +1,23 @@
+---
+import type { ComicEntry } from "../lib/comics";
+import ComicCard from "./ComicCard.astro";
+
+interface Props {
+  comics: ComicEntry[];
+}
+
+const { comics } = Astro.props;
+---
+
+{comics.length > 0 ? (
+  <div class="comic-grid">
+    {comics.map((comic) => (
+      <ComicCard comic={comic} />
+    ))}
+  </div>
+) : (
+  <div class="empty-state">
+    <p class="empty-title">没有找到漫画</p>
+    <p>暂时没有符合条件的内容。</p>
+  </div>
+)}

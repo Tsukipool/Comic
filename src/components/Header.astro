@@ -1,0 +1,29 @@
+---
+import ThemeToggle from "./ThemeToggle.astro";
+import { siteConfig } from "../site.config";
+---
+
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="logo" href="/">
+      <span class="logo-mark">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </span>
+      {siteConfig.title}
+    </a>
+
+    <div class="header-search">
+      <form action="/search" method="get" role="search">
+        <input
+          type="search"
+          name="q"
+          placeholder="搜索漫画"
+          aria-label="搜索漫画"
+          autocomplete="off"
+        />
+      </form>
+    </div>
+
+    <ThemeToggle />
+  </div>
+</header>

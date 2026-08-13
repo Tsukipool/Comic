@@ -1,0 +1,116 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { buildSearchIndex } from "../lib/search";
+
+const index = await buildSearchIndex();
+const initialQuery = Astro.url.searchParams.get("q") ?? "";
+---
+
+<Layout title="搜索" description="星之轨（Tsukipool）· 搜索漫画名称、标签或画师">
+  <h1 class="section-title">搜索</h1>
+
+  <form class="search-form" action="/search" method="get" role="search">
+    <input
+      type="search"
+      name="q"
+      placeholder="搜索名称、标签或画师"
+      value={initialQuery}
+      aria-label="搜索漫画"
+      autocomplete="off"
+    />
+    <button type="submit">搜索</button>
+  </form>
+
+  <noscript>
+    <p style="color: var(--muted);">需要启用 JavaScript 才能进行搜索。</p>
+  </noscript>
+
+  <div id="search-results" class="comic-grid" aria-live="polite"></div>
+</Layout>
+
+<script is:inline define:vars={{ index }}>
+  const resultsEl = document.getElementById("search-results");
+  const params = new URLSearchParams(window.location.search);
+  const query = (params.get("q") ?? "").trim();
+
+  function createCard(item) {
+    const link = document.createElement("a");
+    link.className = "comic-card";
+    link.href = `/comic/${item.slug}`;
+    link.setAttribute("aria-label", `${item.title}，${item.chapterCount} 章`);
+
+    const coverWrap = document.createElement("div");
+    coverWrap.className = "comic-card-cover";
+
+    const img = document.createElement("img");
+    img.src = item.cover;
+    img.alt = item.title;
+    img.loading = "lazy";
+    img.decoding = "async";
+    img.width = 600;
+    img.height = 900;
+    img.onerror = function () {
+      this.onerror = null;
+      this.src = "/default-cover.webp";
+    };
+
+    const count = document.createElement("span");
+    count.className = "comic-card-chapter-count";
+    count.textContent = `${item.chapterCount} 章`;
+
+    coverWrap.append(img, count);
+
+    const body = document.createElement("div");
+    body.className = "comic-card-body";
+
+    const title = document.createElement("h2");
+    title.className = "comic-card-title";
+    title.textContent = item.title;
+
+    const tags = document.createElement("div");
+    tags.className = "comic-card-tags";
+    for (const tag of item.tags) {
+      const span = document.createElement("span");
+      span.textContent = tag;
+      tags.appendChild(span);
+    }
+
+    body.append(title, tags);
+    link.append(coverWrap, body);
+    return link;
+  }
+
+  function showEmpty(title, hint) {
+    resultsEl.innerHTML = "";
+    const box = document.createElement("div");
+    box.className = "empty-state";
+    const t = document.createElement("p");
+    t.className = "empty-title";
+    t.textContent = title;
+    const h = document.createElement("p");
+    h.textContent = hint;
+    box.append(t, h);
+    resultsEl.append(box);
+  }
+
+  if (!query) {
+    showEmpty("输入关键词开始搜索", "可以搜索漫画名称、标签或画师");
+  } else {
+    const normalized = query.toLowerCase();
+    const results = index.filter((item) =>
+      [item.title, item.description, item.artist, ...item.tags]
+        .join("\n")
+        .toLowerCase()
+        .includes(normalized)
+    );
+
+    if (results.length === 0) {
+      showEmpty(`没有找到与「${query}」相关的内容`, "换个关键词试试");
+    } else {
+      resultsEl.innerHTML = "";
+      for (const item of results) {
+        resultsEl.appendChild(createCard(item));
+      }
+    }
+  }
+</script>

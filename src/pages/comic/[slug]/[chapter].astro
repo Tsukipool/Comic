@@ -1,0 +1,51 @@
+---
+import Layout from "../../../layouts/Layout.astro";
+import ComicMeta from "../../../components/ComicMeta.astro";
+import ChapterList from "../../../components/ChapterList.astro";
+import ComicReader from "../../../components/ComicReader.astro";
+import { getAllComics, getComic, parseChapters, getChapter, getChapterIndex } from "../../../lib/comics";
+
+export async function getStaticPaths() {
+  const comics = await getAllComics();
+  return comics.flatMap((comic) =>
+    parseChapters(comic).map((chapter) => ({
+      params: { slug: comic.slug, chapter: chapter.id },
+    }))
+  );
+}
+
+const { slug, chapter: chapterId } = Astro.params;
+const comic = await getComic(slug!);
+const chapter = comic ? getChapter(comic, chapterId!) : undefined;
+if (!comic || !chapter) {
+  throw new Error(`Chapter "${slug}/${chapterId}" 不存在`);
+}
+
+const { title, tags, description, artist } = comic.data;
+const chapters = parseChapters(comic);
+const chapterIndex = getChapterIndex(comic, chapterId!);
+const nextChapter =
+  chapterIndex >= 0 && chapterIndex < chapters.length - 1 ? chapters[chapterIndex + 1] : null;
+---
+
+<Layout
+  title={`${title} - ${chapter.title}`}
+  description={description ?? title}
+  hideFooter
+>
+  <a class="back-link" href={`/comic/${slug}`}>← 返回漫画详情</a>
+
+  <ComicReader
+    comicSlug={slug!}
+    chapterId={chapterId!}
+    chapter={chapter}
+    nextChapter={nextChapter ? { id: nextChapter.id, title: nextChapter.title } : null}
+  />
+
+  <div class="reader-meta">
+    <ComicMeta title={title} artist={artist} tags={tags} />
+  </div>
+
+  <h2 class="section-title">章节列表</h2>
+  <ChapterList comicSlug={slug!} chapters={chapters} currentId={chapterId!} />
+</Layout>

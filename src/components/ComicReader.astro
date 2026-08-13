@@ -1,0 +1,44 @@
+---
+import type { Chapter } from "../types/comic";
+
+interface Props {
+  comicSlug: string;
+  chapterId: string;
+  chapter: Chapter;
+  nextChapter: { id: string; title: string } | null;
+}
+
+const { comicSlug, chapterId, chapter, nextChapter } = Astro.props;
+const payload = {
+  comicSlug,
+  chapterId,
+  chapterTitle: chapter.title,
+  images: chapter.images.map((image) => ({ src: image.src, alt: image.alt })),
+  nextChapter,
+};
+---
+
+<div class="reader" data-reader>
+  <div class="reader-viewport" data-reader-viewport></div>
+
+  <div class="reader-hint" data-reader-hint hidden aria-live="polite">
+    <p class="reader-hint-text">
+      即将进入下一章：<strong data-reader-hint-title></strong>
+    </p>
+    <button class="reader-hint-cancel" type="button" data-reader-hint-cancel>取消</button>
+  </div>
+
+  <div data-reader-controls></div>
+</div>
+
+<script type="application/json" data-reader-data set:html={JSON.stringify(payload).replace(/</g, "\\u003c")}></script>
+
+<script>
+  import { createReader } from "./ComicReader";
+
+  const script = document.querySelector<HTMLScriptElement>("[data-reader-data]");
+  const root = document.querySelector<HTMLElement>("[data-reader]");
+  if (script && root) {
+    createReader(root, JSON.parse(script.textContent ?? "{}"));
+  }
+</script>
