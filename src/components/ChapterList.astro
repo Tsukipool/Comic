@@ -11,18 +11,16 @@ const { comicSlug, chapters, currentId } = Astro.props;
 ---
 
 <div class="chapter-list" role="list" aria-label="章节列表">
-  {chapters.map((chapter, index) => {
+  {chapters.map((chapter) => {
     const current = chapter.id === currentId;
-    const number = String(index + 1).padStart(2, "0");
     return (
       <a
         class="chapter-item"
         role="listitem"
         href={`/comic/${comicSlug}/${chapter.id}`}
         aria-current={current ? "true" : undefined}
-        aria-label={`第 ${number} 章：${chapter.title}`}
+        aria-label={chapter.title}
       >
-        <span class="chapter-number">{number}</span>
         {chapter.title}
       </a>
     );

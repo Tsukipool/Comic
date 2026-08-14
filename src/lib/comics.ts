@@ -95,6 +95,12 @@ function extractImages(content: string[], baseUrl: string): ComicImage[] {
   return images;
 }
 
+function chapterTitle(heading: string | undefined, index: number): string {
+  if (!heading) return `第 ${index + 1} 章`;
+  const name = heading.replace(/^第\s*\d+\s*章\s*[:：]?\s*/, "").trim();
+  return name || heading;
+}
+
 export function parseChapters(entry: ComicEntry): Chapter[] {
   const cached = CHAPTER_INDEX.get(entry.slug);
   if (cached) return cached;
@@ -136,7 +142,7 @@ export function parseChapters(entry: ComicEntry): Chapter[] {
 
     chapters.push({
       id: uniqueId,
-      title: section.heading ?? `第 ${index + 1} 章`,
+      title: chapterTitle(section.heading, index),
       images,
     });
   });

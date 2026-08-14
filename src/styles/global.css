@@ -418,10 +418,6 @@ h1, h2, h3, h4, p { margin: 0; }
   color: #1c1912;
   border-color: var(--accent);
 }
-.chapter-item .chapter-number {
-  font-weight: 600;
-  margin-right: 0.375rem;
-}
 
 /* ---------- Detail page ---------- */
 
