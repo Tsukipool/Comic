@@ -1,7 +1,7 @@
 ---
 title: "东方茨歌仙"
 slug: "touhou-ibarakasen"
-cover: "https://comic-1.tsukipool.cc/Touhou%20Ibarakasen/%E7%AC%AC01%E8%AF%9D%20%E7%8B%AC%E8%87%82%E6%9C%89%E8%A7%92%E7%9A%84%E4%BB%99%E4%BA%BA/001.avif"
+cover: "/media/comics/touhou-ibarakasen/cover.jpg"
 artist: "ZUN / あずまあや"
 tags:
   - 东方Project

@@ -1,7 +1,7 @@
 ---
 title: "东方醉蝶华"
 slug: "touhou-suichouka"
-cover: "https://comic-1.tsukipool.cc/Touhou%20Suichouka%20/%E4%B8%9C%E6%96%B9%E9%86%89%E8%9D%B6%E5%8D%8E%20%E7%AC%AC01%E8%AF%9D%20%E9%85%92%E5%AE%A2%E7%9A%84%E8%AE%B0%E5%BF%86%E4%B8%8D%E8%BF%87%E5%A4%A9%E6%98%8E%20%E5%89%8D%E7%AF%87/001.avif"
+cover: "/media/comics/touhou-suichouka/cover.jpg"
 artist: "ZUN / 水炊き"
 tags:
   - 东方Project
