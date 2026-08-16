@@ -112,8 +112,16 @@ h1, h2, h3, h4, p { margin: 0; }
   color: var(--text);
   letter-spacing: 0.12em;
   white-space: nowrap;
+  min-width: 0;
+  flex-shrink: 1;
 }
 .logo:hover { text-decoration: none; opacity: 0.85; }
+
+.logo-text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
 
 .logo-mark {
   width: 30px;
@@ -306,13 +314,14 @@ h1, h2, h3, h4, p { margin: 0; }
 
 .comic-card-tags span {
   display: inline-block;
-  padding: 1px 8px;
+  padding: 0 6px;
   border: 1px solid var(--border-soft);
   border-radius: 999px;
   background: transparent;
   color: var(--text-muted);
   line-height: 1.6;
   letter-spacing: 0.08em;
+  font-size: 0.58rem;
 }
 
 .card-go {
@@ -335,12 +344,12 @@ h1, h2, h3, h4, p { margin: 0; }
 
 .tag-link {
   display: inline-block;
-  padding: 2px 12px;
+  padding: 0 8px;
   border: 1px solid var(--border-soft);
   border-radius: 999px;
   background: transparent;
   color: var(--text-muted);
-  font-size: 0.75rem;
+  font-size: 0.6rem;
   line-height: 1.6;
   letter-spacing: 0.08em;
   transition: border-color 0.2s, color 0.2s, transform 0.15s;
@@ -377,10 +386,16 @@ h1, h2, h3, h4, p { margin: 0; }
 
 .comic-description {
   margin-top: 1rem;
+  padding: 1rem 1.25rem;
+  border: 1px solid var(--border-soft);
+  border-radius: 8px;
+  background: var(--bg-soft);
   color: var(--text-muted);
   font-size: 0.9rem;
   line-height: 1.8;
-  max-width: 62ch;
+  text-align: justify;
+  text-justify: inter-ideograph;
+  overflow-wrap: break-word;
 }
 
 /* ---------- Chapter List ---------- */
@@ -447,6 +462,10 @@ h1, h2, h3, h4, p { margin: 0; }
 
 .detail-chapters {
   margin-top: 2rem;
+  padding: 1rem 1.25rem;
+  border: 1px solid var(--border-soft);
+  border-radius: 8px;
+  background: var(--bg-soft);
 }
 
 @media (min-width: 768px) {
@@ -935,7 +954,7 @@ main:has(.reader) .main-gap {
   }
 
   .header-search input {
-    width: min(9rem, 38vw);
+    width: min(8rem, 30vw);
     max-width: none;
     font-size: 0.8rem;
   }
