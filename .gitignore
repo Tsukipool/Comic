@@ -3,3 +3,11 @@ dist/
 .astro/
 .DS_Store
 npm-debug.log*
+
+# Linux
+*~
+.fuse_hidden*
+.directory
+.Trash-*
+.nfs*
+nohup.out
