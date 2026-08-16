@@ -14,6 +14,11 @@ const TAG_SLUG_MAP: Record<string, string> = {
   民间传说: "folklore",
   历史: "history",
   恋爱: "romance",
+  东方Project: "touhou-project",
+  官方漫画: "official-manga",
+  妖怪: "youkai",
+  鬼: "oni",
+  酒: "sake",
 };
 
 const SLUG_TAG_MAP: Record<string, string> = Object.fromEntries(
