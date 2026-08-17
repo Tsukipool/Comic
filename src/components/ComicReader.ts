@@ -12,7 +12,7 @@ export interface ReaderData {
 }
 
 const STORAGE_PREFIX = "comic-progress:";
-const AUTO_NEXT_DELAY = 1500;
+const AUTO_NEXT_DELAY = 10000;
 const SWIPE_THRESHOLD = 40;
 
 function clamp(value: number, min: number, max: number): number {

@@ -727,16 +727,23 @@ main:has(.reader) .main-gap {
   transform: translateX(-50%);
   z-index: 45;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 1rem;
   padding: 0.625rem 1.125rem;
   border: 1px solid var(--border-soft);
-  border-radius: 999px;
+  border-radius: 12px;
   background: var(--card);
   box-shadow: var(--shadow);
   font-size: 0.875rem;
-  white-space: nowrap;
   max-width: calc(100% - 2rem);
+  text-align: center;
+}
+.reader-hint-text {
+  min-width: 0;
+  margin: 0;
+}
+.reader-hint-text strong {
+  overflow-wrap: anywhere;
 }
 .reader-hint[hidden] {
   display: none;
@@ -750,7 +757,8 @@ main:has(.reader) .main-gap {
   font-size: 0.85rem;
   font-family: inherit;
   cursor: pointer;
-  padding: 0;
+  padding: 0.25rem 0;
+  flex-shrink: 0;
   text-decoration: underline;
 }
 .reader-hint-cancel:hover {
