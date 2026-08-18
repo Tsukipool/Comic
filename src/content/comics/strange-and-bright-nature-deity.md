@@ -1,7 +1,7 @@
 ---
 title: "东方三月精 ~ Strange and Bright Nature Deity"
 slug: "strange-and-bright-nature-deity"
-cover: "https://comic-1.tsukipool.cc/Strange%20and%20Bright%20Nature%20Deity/%E7%AC%AC01%E8%AF%9D%20%E6%A2%85%E9%9B%A8%E3%81%AE%E5%88%AB/01.avif"
+cover: "/media/comics/strange-and-bright-nature-deity/cover.jpg"
 artist: "ZUN / 比良坂真琴"
 tags:
   - 东方Project

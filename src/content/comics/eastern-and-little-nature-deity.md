@@ -1,8 +1,8 @@
 ---
 title: "东方三月精 ~ Eastern and Little Nature Deity"
 slug: "eastern-and-little-nature-deity"
-cover: "https://comic-1.tsukipool.cc/Eastern%20and%20Little%20Nature%20Deity/%E4%B8%9C%E6%96%B9%E4%B8%89%E6%9C%88%E7%B2%BE%20%E7%AC%AC00%E8%AF%9D%20%E6%A8%B1%E4%B9%8B%E8%B7%9D%E7%A6%BB%20%E4%B8%8A/02.avif"
-artist: "ZUN / 比良坂真琴"
+cover: "/media/comics/eastern-and-little-nature-deity/cover.jpg"
+artist: "ZUN / 比良坂真琴 / 松倉ねむ"
 tags:
   - 东方Project
   - 官方漫画

@@ -1,7 +1,7 @@
 ---
 title: "东方三月精 ~ Oriental Sacred Place"
 slug: "oriental-sacred-place"
-cover: "https://comic-1.tsukipool.cc/Oriental%20Sacred%20Place/%E7%AC%AC01%E8%AF%9D%20%20%E7%A5%9E%E7%A4%BE%E5%90%8E%E5%9B%AD%E6%B7%B1%20%E5%89%8D%E7%AF%87/001.avif"
+cover: "/media/comics/oriental-sacred-place/cover.jpg"
 artist: "ZUN / 比良坂真琴"
 tags:
   - 东方Project
